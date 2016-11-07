@@ -1,0 +1,458 @@
+header {
+    background: black;
+    background-size: cover;
+}
+
+body {
+    height: 100%;
+}
+
+footer {
+    border-top: 1px solid rgba(255,165,0,1);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+}
+
+a {
+    text-decoration: none;
+    color: rgba(255,165,0,1);
+}
+
+nav ul {
+    margin: 0 auto;
+    width: 850px;
+    padding-left: 46px;
+    display: flex;
+    justify-content: space-around;
+}
+
+ul li a {
+    text-transform: uppercase;
+    font-size: 17px;
+    display: inline-block;
+    padding: 14px 16px;
+    transition: .3s;
+    border-bottom: 1px solid transparent;
+}
+
+ul li a:hover {
+    border-bottom: 1px solid;
+    color: rgba(222, 140, 0, 1);
+}
+
+nav ul li {
+    display: inline;
+}
+
+body {
+    position: relative;
+    margin: 0;
+    overflow:hidden;
+    background: url("/images/bg.jpg");
+    background-size: cover;
+}
+
+.wrap {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.mainTable {
+    margin: 20px auto 0;
+    padding-top: 100px;
+    width: 800px;
+    overflow: auto;
+}
+
+.storageTable {
+    margin: 20px 0 0 600px;
+    padding-top: 100px;
+    width: 800px;
+    overflow: auto;
+}
+
+div table {
+    margin-top: 20px;
+    font-size: 20px;
+    border-collapse: collapse;
+    color: white;
+}
+
+.horizontal-th {
+    padding-bottom: 30px;
+}
+
+td,th {
+    width: 200px;
+    text-align: center;
+}
+
+.ordersFindButtons {
+    text-align: center;
+    width: 800px;
+    margin: 20px auto;
+}
+
+.wrap-1 {
+    padding: 20px 0 20px 95px;
+    width: 800px;
+    margin: 0 auto;
+}
+
+.wrap-2 {
+    height: 500px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.listOfDishesWhileEditingOrderInfo {
+    text-align: center;
+    width: 500px;
+    height: 300px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.listOfDishesInOrder {
+    height: 300px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.ordersTable {
+    margin-top: 0;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.hover:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.47);
+}
+
+.firstColumn {
+    font-weight: 900;
+}
+
+tr {
+    height: 52px;
+    transition: background-color .3s;
+}
+
+.title {
+    color: orange;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+input[type="text"] {
+    background-color: transparent;
+    outline: 0;
+    padding: 10px;
+    width: 600px;
+    border-radius: 5px;
+    font-size: 18px;
+    border-color: orange;
+    color: rgba(255, 255, 255, 0.80);
+}
+
+button {
+    cursor: pointer;
+    margin-left: 10px;
+    padding: 12px 40px;
+    border-radius: 5px;
+    border: 0;
+    font-size: 18px;
+    background-color: rgba(255, 165, 0, 1);
+}
+
+.selectedPositionButton {
+    cursor: pointer;
+    margin-top: 12px;
+    margin-left: 25px;
+    padding: 10px 20px 10px 10px;
+    border-radius: 5px;
+    border: 0;
+    font-size: 18px;
+    background-color: rgba(255, 165, 0, 1);
+}
+
+button:hover {
+    transition: .1s;
+    background-color: rgba(232, 140, 0, 1);
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(255, 165, 0, 0.5);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(255, 165, 0, 1);
+}
+.dishCentralPanel {
+    margin: 100px auto;
+    width: 50%;
+    padding: 10px;
+    border: 3px solid rgba(255, 165, 0 ,1)
+}
+
+.newOrderCentralPanel {
+    margin: 100px auto;
+    width: 50%;
+    padding: 10px;
+    border: 3px solid rgba(255, 165, 0 ,1)
+}
+
+.employeeCentralPanel {
+    margin: 100px auto;
+    width: 40%;
+    padding: 10px;
+    border: 3px solid rgba(255, 165, 0 ,1)
+}
+
+.employeePhoto {
+    position: absolute;
+    margin-top: -15px;
+    margin-left: 390px;
+}
+
+.dishPhoto {
+    position: absolute;
+    margin-left: 450px;
+
+
+}
+.listOfIngredients {
+    color: rgba(255, 165, 0 ,1);
+    margin: 20px 90px;
+}
+
+.listOfIngredients li {
+    padding: 3px;
+    margin-left: 30px
+}
+
+footer ul {
+    text-align: center;
+    color: orange;
+}
+
+footer ul li {
+    display: inline-block;
+    padding: 0 50px;
+}
+
+iframe {
+    position: absolute;
+    width: 50%;
+    margin: 150px 450px;
+}
+
+.workTime {
+    font-size: 20px;
+    color: rgba(255, 165, 0, 0.95);
+    position: absolute;
+    margin: 20px 600px;
+
+}
+.workTime ul li {
+    display: inline-block;
+    padding: 0 30px;
+}
+
+.schemaCentralPanel {
+    margin: 100px 0px;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+}
+
+.buttonCreate {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    margin: 25px auto;
+}
+
+.employeeCentralPanel input[type="text"] {
+    width: 400px;
+}
+
+input[type="date"] {
+    background-color: transparent;
+    outline: 0;
+    padding: 10px;
+    width: 400px;
+    border-radius: 5px;
+    font-size: 18px;
+    border-color: orange;
+    color: rgba(255, 255, 255, 0.80);
+}
+
+input[type="number"] {
+    background-color: transparent;
+    outline: 0;
+    padding: 10px;
+    width: 400px;
+    border-radius: 5px;
+    font-size: 18px;
+    border-color: orange;
+    color: rgba(255, 255, 255, 0.80);
+}
+
+select {
+    background-color: transparent;
+    outline: 0;
+    padding: 10px;
+    width: 400px;
+    border-radius: 5px;
+    font-size: 18px;
+    border-color: orange;
+    color: rgba(255, 165, 0, 0.95);
+}
+
+.employeeInformationSubmitButton {
+    width: 100%;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.ordersButtons {
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+}
+
+.orderTable {
+    margin-left: 400px;
+    width: 50%;
+    text-align: center;
+}
+
+.orderButtonBack {
+    width: 50%;
+
+    margin-top: 30px;
+}
+
+.orderButtonBack button {
+    margin-left: 500px
+}
+
+.selectedOrderButtons {
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.updateOrderButtons {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.updateOrderButtons1 {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.listOfDishes {
+    margin-left: 150px;
+}
+
+.storageTable .wrap-2 {
+    width: 500px
+}
+
+.ingredientCentralPanel {
+    text-align: center;
+    margin: 100px auto;
+    width: 30%;
+    padding: 10px;
+    border: 3px solid rgba(255, 165, 0 ,1)
+}
+
+.ingredientButtons {
+    margin-top: 20px;
+}
+
+.ingredientCentralPanel .table {
+    text-align: center;
+    margin-left: 60px;;
+}
+
+.ingredientCentralPanel input[type="number"] {
+    width: 300px;
+}
+
+.ingredientCentralPanel input[type="text"] {
+    width: 300px;
+}
+
+.ingredientCentralPanel .table {
+    margin-right: 100px;
+}
+
+.ingredientCentralPanel .table th {
+    padding-right: 20px;
+}
+
+.newOrderCentralPanel p select {
+    margin-left: 200px;
+}
+
+.newOrderCentralPanel button {
+    margin-left: 350px
+}
+
+.indexCentralPanel {
+    color: rgba(255, 165, 0 ,1);
+    font-size: 20px;
+    margin: 80px auto;
+    height: 100%;
+    width: 50%;
+    text-align: left;
+}
+
+.logo {
+    color: rgba(255, 165, 0 ,1);
+    position: absolute;
+    font-size: 25px;
+    margin-left: 20px;
+    height: 49px;
+    line-height: 49px;
+}
+
+.wrap-0 {
+    text-align: center;
+    margin: 100px auto;
+    width: 40%;
+    padding: 10px;
+    border: 3px solid rgba(255, 165, 0 ,1);
+}
+
+.wrap-0 td {
+    text-align: left;
+}
+
+.wrap-0 table {
+    margin-left: 40px;
+}
+
+.wrap-0 .listOfIngredients {
+    margin-left: 200px
+}
+
+.wrap-0 input[type="text"] {
+    width: 400px
+}

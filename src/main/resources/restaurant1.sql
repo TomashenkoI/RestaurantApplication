@@ -1,0 +1,72 @@
+﻿CREATE DATABASE restaurant1
+
+CREATE TABLE EMPLOYEES(
+	ID INT PRIMARY KEY NOT NULL,
+	FirstName CHARACTER VARYING(20) NOT NULL,
+	LastName CHARACTER VARYING(20) NOT NULL,
+	DateOfBirth CHARACTER VARYING(20) NOT NULL,
+	PhoneNumber CHARACTER VARYING(20), 
+	Position CHARACTER VARYING(20),
+	Salary REAL
+	)
+
+
+CREATE TABLE INGREDIENTS(
+	ID INT PRIMARY KEY NOT NULL,
+	Name CHARACTER VARYING(20) NOT NULL
+	)
+
+CREATE TABLE STORAGE(
+	Ingredient_ID INT PRIMARY KEY references INGREDIENTS(ID),
+	Amount INT 
+	)
+
+CREATE TABLE Category_of_dishes(
+	ID INT PRIMARY KEY NOT NULL,
+	NAME CHARACTER VARYING(20) NOT NULL
+	)
+	
+CREATE TABLE ingredients_to_dish(
+	dish_ID INT,
+	Ingredient_ID INT references INGREDIENTS(ID)
+	)
+
+CREATE TABLE DISHES(
+	ID INT PRIMARY KEY NOT NULL,
+	Name CHARACTER VARYING(20) NOT NULL,
+	CategoryOfDishes_ID int references Category_of_dishes(ID),
+	ListOfIngredients INT,
+	Price REAL NOT NULL,
+	Weight INT
+	)
+
+CREATE TABLE Dish_to_order(
+	Order_ID INT references orders(id),
+	Dish_ID INT references DISHES(ID)
+	)
+
+ALTER TABLE dish_to_order add constraint Orders CHECK (list_Of_Dishes)
+
+CREATE TABLE ORDERS(
+	ID INT PRIMARY KEY NOT NULL,
+	EMPLOYEE_ID INT references EMPLOYEES(ID),
+	list_Of_Dishes INT,
+	TableNumber INT,
+	Date DATE
+	)
+
+ALTER TABLE Dish_to_order add constraint Orders unique (Order_ID)
+
+CREATE TABLE MENU(
+	ID INT PRIMARY KEY NOT NULL,
+	Name CHARACTER VARYING(20) NOT NULL,
+	Dish_to_order INT
+	)
+
+CREATE TABLE COOKED_DISHES(
+	ID INT PRIMARY KEY NOT NULL,
+	Dish_ID INT references DISHES(ID),
+	Employee_ID INT references EMPLOYEES(ID),
+	Order_ID INT references ORDERS(ID),
+	Date DATE NOT NULL
+	)
