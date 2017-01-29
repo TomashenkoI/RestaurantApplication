@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+
 @Entity
 @Table(name = "ingredients_to_dish")
 public class ListOfIngredients implements Serializable {

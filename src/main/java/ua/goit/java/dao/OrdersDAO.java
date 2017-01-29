@@ -4,8 +4,6 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
-//import ua.goit.java.Controller.DishToOrderController;
-//import ua.goit.java.Controller.EmployeesController;
 import ua.goit.java.dao.model.Employee;
 import ua.goit.java.dao.model.Orders;
 

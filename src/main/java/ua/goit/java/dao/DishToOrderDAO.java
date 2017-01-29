@@ -4,11 +4,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
-//import ua.goit.java.Controller.DishesController;
-//import ua.goit.java.Controller.OrderController;
 import ua.goit.java.dao.model.DishToOrder;
-
-import java.util.List;
 
 public class DishToOrderDAO{
 
@@ -22,14 +18,6 @@ public class DishToOrderDAO{
 
     public void remove(DishToOrder dishToOrder) {
         sessionFactory.getCurrentSession().delete(dishToOrder);
-    }
-
-    public List<DishToOrder> findAll() {
-        return null;
-    }
-
-    public DishToOrder findByName() {
-        return null;
     }
 
     @Transactional

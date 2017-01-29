@@ -3,9 +3,6 @@ package ua.goit.java.dao;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-//import ua.goit.java.Controller.DishesController;
-//import ua.goit.java.Controller.EmployeesController;
-//import ua.goit.java.Controller.OrderController;
 import ua.goit.java.dao.model.CookedDish;
 
 import java.util.List;

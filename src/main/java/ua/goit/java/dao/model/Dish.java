@@ -5,9 +5,6 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.List;
 
-/**
- * Created by 7 on 12.08.2016.
- */
 @Entity
 @Table(name = "dishes")
 public class Dish {

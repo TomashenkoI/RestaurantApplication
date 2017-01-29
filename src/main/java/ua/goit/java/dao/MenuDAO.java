@@ -9,9 +9,6 @@ import ua.goit.java.dao.DishToOrderDAO;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * Created by 7 on 23.08.2016.
- */
 public class MenuDAO{
 
     private DishToOrderDAO dishToOrderDAO = new DishToOrderDAO();
@@ -44,19 +41,6 @@ public class MenuDAO{
         Query query = session.createQuery("select m from Menu m");
         return query.list();
     }
-
-
-    public void enteringInformation(Menu menu) {
-
-        Scanner scanner = new Scanner(System.in);
-
-
-        System.out.println("Введите название меню :");
-        String name = scanner.nextLine();
-        menu.setName(name);
-
-    }
-
 
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
