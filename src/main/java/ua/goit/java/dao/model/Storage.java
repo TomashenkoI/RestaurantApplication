@@ -53,11 +53,4 @@ public class Storage {
         this.amount = amount;
     }
 
-    @Override
-    public String toString() {
-        return "Storage{" +
-                ", ingredient_ID=" + ingredient_ID +
-                ", amount=" + amount +
-                '}';
-    }
 }

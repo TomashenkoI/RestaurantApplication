@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface StorageDAO extends GenericDAO<Storage, Integer> {
 
-    List<Storage> findByName(String ingredientName);
+    List<Storage> findByIngredientName(String ingredientName);
 
 }

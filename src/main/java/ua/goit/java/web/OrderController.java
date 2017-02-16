@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ua.goit.java.dao.model.Employee;
 import ua.goit.java.service.EmployeeService;
 import ua.goit.java.service.OrderService;
+import ua.goit.java.service.Requests;
 
 import java.util.ArrayList;
 
@@ -112,11 +113,7 @@ public class OrderController {
 
         ModelAndView modelAndView = new ModelAndView();
 
-        System.out.println(date);
-
-        Requests requests = new Requests();
-
-        date = requests.parsedDate(date);
+        date = Requests.parsedDate(date);
 
         modelAndView.addObject("waiters", employeeService.getAllWaiters());
         modelAndView.addObject("orders", orderService.getOrderByDate(date));

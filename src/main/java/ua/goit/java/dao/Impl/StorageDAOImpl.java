@@ -16,7 +16,7 @@ public class StorageDAOImpl extends GenericDAOImpl<Storage, Integer> implements 
     @Autowired
     private SessionFactory sessionFactory;
 
-    public List<Storage> findByName(String ingredientName) {
+    public List<Storage> findByIngredientName(String ingredientName) {
 
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("select s from Storage s where s.ingredient = :ingredient");

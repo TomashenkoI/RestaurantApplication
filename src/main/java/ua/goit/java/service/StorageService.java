@@ -69,7 +69,7 @@ public class StorageService {
 
     @Transactional
     public List<Storage> getByName(String ingredientName) {
-        return storageDAO.findByName(ingredientName);
+        return storageDAO.findByIngredientName(ingredientName);
     }
 
     @Transactional

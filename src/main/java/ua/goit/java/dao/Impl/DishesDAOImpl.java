@@ -20,12 +20,6 @@ public class DishesDAOImpl extends GenericDAOImpl<Dish, Integer> implements Dish
     private SessionFactory sessionFactory;
 
     @Transactional
-    public List<Dish> findAll() {
-        Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("select d from Dish d").list();
-    }
-
-    @Transactional
     public List<Dish> findByName(String name) {
 
         Session session = sessionFactory.getCurrentSession();
