@@ -29,7 +29,7 @@ public class Employee {
 
     @Column(name = "position")
     @Enumerated(EnumType.STRING)
-    private Position position;
+    private EmployeePosition employeePosition;
 
     @Column(name = "salary")
     private double salary;
@@ -77,12 +77,12 @@ public class Employee {
         this.phoneNumber = phoneNumber;
     }
 
-    public Position getPosition() {
-        return position;
+    public EmployeePosition getEmployeePosition() {
+        return employeePosition;
     }
 
-    public void setPosition(Position position) {
-        this.position = position;
+    public void setEmployeePosition(EmployeePosition employeePosition) {
+        this.employeePosition = employeePosition;
     }
 
     public double getSalary() {
@@ -109,7 +109,7 @@ public class Employee {
                 " firstName=" +  "\t" + firstName +
                 " dateOfBirth=" +  "\t" + dateOfBirth +
                 " phoneNumber=" +  "\t" + phoneNumber +
-                " position=" +  "\t" + position + "\t" +
+                " employeePosition=" +  "\t" + employeePosition + "\t" +
                 " salary= " + salary +
                 '}';
     }

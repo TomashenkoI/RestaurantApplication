@@ -1,7 +1,12 @@
 package ua.goit.java.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.goit.java.dao.DishesDAO;
+import ua.goit.java.dao.Impl.DishesDAOImpl;
+import ua.goit.java.dao.Impl.IngredientsDAOImpl;
+import ua.goit.java.dao.Impl.StorageDAOImpl;
 import ua.goit.java.dao.IngredientsDAO;
 import ua.goit.java.dao.StorageDAO;
 import ua.goit.java.dao.model.Dish;
@@ -10,10 +15,16 @@ import ua.goit.java.dao.model.Storage;
 
 import java.util.List;
 
+@Service
 public class StorageService {
 
+    @Autowired
     private StorageDAO storageDAO;
+
+    @Autowired
     private IngredientsDAO ingredientsDAO;
+
+    @Autowired
     private DishesDAO dishesDAO;
 
     public List<Storage> getAll() {
@@ -23,17 +34,18 @@ public class StorageService {
     @Transactional
     public void addNewIngredient(Ingredient ingredient, int amount) {
 
-        ingredientsDAO.save(ingredient);
-        storageDAO.save(new Storage(ingredient, amount));
+        ingredientsDAO.create(ingredient);
+        storageDAO.create(new Storage(ingredient, amount));
     }
 
     @Transactional
     public void updateStorage(int storageId, String name, int amount) {
 
         Storage storage = getById(storageId);
+        storage.setAmount(amount);
+        storage.getIngredient().setName(name);
 
-        ingredientsDAO.updateIngredient(storage.getIngredient_ID(), name);
-        storageDAO.updateStorageInfo(storageId, amount);
+        storageDAO.update(storage);
     }
 
     @Transactional
@@ -43,11 +55,11 @@ public class StorageService {
 
         List<Dish> list = dishesDAO.findAll();
 
-        Ingredient i = ingredientsDAO.getById(ingredientId);
-
         for (Dish d : list) {
             for (Ingredient ing : d.getIngredients()) {
-                if (ing.getID() == ingredientId) result = false;
+                if (ing.getID() == ingredientId) {
+                    result = false;
+                }
             }
 
         }
@@ -57,29 +69,29 @@ public class StorageService {
 
     @Transactional
     public List<Storage> getByName(String ingredientName) {
-        return storageDAO.getIngredientsByName(ingredientName);
+        return storageDAO.findByName(ingredientName);
     }
 
     @Transactional
     public Storage getById(int ingredientId) {
-        return storageDAO.findById(ingredientId);
+        return storageDAO.read(ingredientId);
     }
 
     @Transactional
     public void delete(Storage storage) {
-        storageDAO.remove(storage);
-        ingredientsDAO.remove(storage.getIngredient());
+        storageDAO.delete(storage);
+        ingredientsDAO.delete(storage.getIngredient());
     }
 
-    public void setDishesDAO(DishesDAO dishesDAO) {
+    public void setDishesDAO(DishesDAOImpl dishesDAO) {
         this.dishesDAO = dishesDAO;
     }
 
-    public void setStorageDAO(StorageDAO storageDAO) {
+    public void setStorageDAO(StorageDAOImpl storageDAO) {
         this.storageDAO = storageDAO;
     }
 
-    public void setIngredientsDAO(IngredientsDAO ingredientsDAO) {
+    public void setIngredientsDAO(IngredientsDAOImpl ingredientsDAO) {
         this.ingredientsDAO = ingredientsDAO;
     }
 }

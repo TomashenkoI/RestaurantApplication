@@ -44,7 +44,7 @@
         </tr>
         <tr>
             <th>Position</th>
-            <td>${employee.position}</td>
+            <td>${employee.employeePosition}</td>
         </tr>
         <tr>
             <th>Date of birth</th>

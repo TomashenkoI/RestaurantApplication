@@ -1,44 +1,54 @@
 package ua.goit.java.service;
 
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 import ua.goit.java.dao.EmployeeDAO;
+import ua.goit.java.dao.Impl.EmployeeDAOImpl;
 import ua.goit.java.dao.model.Employee;
-import ua.goit.java.dao.model.Position;
+import ua.goit.java.dao.model.EmployeePosition;
 import ua.goit.java.dao.model.Waiter;
 
 import java.util.List;
 
+@Service
 public class EmployeeService {
 
+    @Autowired
     private EmployeeDAO employeeDao;
 
     public List<Employee> getEmployees(){
         return employeeDao.findAll();
     }
 
-    @Transactional
     public List<Employee> getEmployeesByName(String employeeName) {
-        return employeeDao.findByName1(employeeName);
+        return employeeDao.findByName(employeeName);
     }
 
-    @Transactional
     public void updateEmployeeInfo(int id, Employee employeeWithNewInformation) {
-        employeeDao.updateEmployee(id, employeeWithNewInformation);
+
+        Employee employee = employeeDao.read(id);
+
+        employee.setFirstName(employeeWithNewInformation.getFirstName());
+        employee.setLastName(employeeWithNewInformation.getFirstName());
+        employee.setEmployeePosition(employeeWithNewInformation.getEmployeePosition());
+        employee.setPhoneNumber(employeeWithNewInformation.getPhoneNumber());
+        employee.setSalary(employeeWithNewInformation.getSalary());
+        employee.setDateOfBirth(employeeWithNewInformation.getDateOfBirth());
+
+        employeeDao.update(employee);
     }
 
-    @Transactional
     public Employee getEmployeeByID(int id) {
-        return employeeDao.findById(id);
+        return employeeDao.read(id);
     }
 
     public List<Waiter> getAllWaiters() {
         return employeeDao.findAllWaiters();
     }
 
-    @Transactional
     public void deleteEmployee(Employee employee) {
-        employeeDao.remove(employee);
+        employeeDao.delete(employee);
     }
 
     public boolean checkValidPhoneNumber(String phoneNumber) {
@@ -52,7 +62,6 @@ public class EmployeeService {
         return result;
     }
 
-    @Transactional
     public void employeeWithoutPhoneNumber(String firstName, String lastName, String dateOfBirth, double salary, ModelAndView modelAndView) {
 
         Employee employee = new Employee();
@@ -64,8 +73,6 @@ public class EmployeeService {
         modelAndView.addObject("employee", employee);
     }
 
-
-    @Transactional
     public void addNewEmployee(String firstName, String lastName, String phoneNumber, String dateOfBirth, double salary,
                                String position) {
 
@@ -79,7 +86,7 @@ public class EmployeeService {
         setEmployeePosition(position, employee);
         employee.setPhotoURL("/images/employees/default.jpg");
 
-        employeeDao.save(employee);
+        employeeDao.create(employee);
     }
 
     public Employee setInformation(String name, String surname, String phoneNumber,
@@ -99,17 +106,17 @@ public class EmployeeService {
 
     public void setEmployeePosition(String position, Employee employee) {
         if (position.equals("Waiter")) {
-            employee.setPosition(Position.WAITER);
+            employee.setEmployeePosition(EmployeePosition.WAITER);
         } else if (position.equals("Cook")) {
-            employee.setPosition(Position.COOK);
+            employee.setEmployeePosition(EmployeePosition.COOK);
         } else if (position.equals("Manager")) {
-            employee.setPosition(Position.MANAGER);
+            employee.setEmployeePosition(EmployeePosition.MANAGER);
         } else if (position.equals("Cleaner")) {
-            employee.setPosition(Position.CLEANER);
+            employee.setEmployeePosition(EmployeePosition.CLEANER);
         }
     }
 
-    public void setEmployeeDao(EmployeeDAO employeeDao) {
+    public void setEmployeeDao(EmployeeDAOImpl employeeDao) {
         this.employeeDao = employeeDao;
     }
 }

@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "dishes")
@@ -19,7 +20,8 @@ public class Dish {
     @Enumerated(EnumType.STRING)
     private DishCategory dishCategory;
 
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+//    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "ingredients_to_dish",
             joinColumns = @JoinColumn(name = "dish_id"),
@@ -35,6 +37,24 @@ public class Dish {
 
     @Column(name = "weight")
     private int weight;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Dish)) return false;
+        Dish dish = (Dish) o;
+        return ID == dish.ID &&
+                Double.compare(dish.price, price) == 0 &&
+                weight == dish.weight &&
+                dishCategory == dish.dishCategory &&
+                Objects.equals(ingredients, dish.ingredients) &&
+                Objects.equals(name, dish.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID, dishCategory, ingredients, name, price, weight);
+    }
 
     public int getID() {
         return ID;
@@ -84,15 +104,4 @@ public class Dish {
         this.weight = weight;
     }
 
-    @Override
-    public String toString() {
-        return "Dish{" +
-                "ID=" + ID +
-                " Dish_category_ID =" + dishCategory + "\t" +
-                " list_of_ingredients_ID =" + ingredients + "\t" +
-                " name_of_the_dish= " + name + "\t" +
-                " price=" + price + "\t" +
-                " weight=" + weight +
-                '}';
-    }
 }

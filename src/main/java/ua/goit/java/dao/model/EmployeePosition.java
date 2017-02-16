@@ -1,6 +1,6 @@
 package ua.goit.java.dao.model;
 
-public enum Position {
+public enum EmployeePosition {
 
     WAITER,
     COOK,

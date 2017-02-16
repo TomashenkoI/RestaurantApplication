@@ -1,42 +1,55 @@
 package ua.goit.java.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.goit.java.dao.*;
+import ua.goit.java.dao.Impl.DishesDAOImpl;
+import ua.goit.java.dao.Impl.OrdersDAOImpl;
 import ua.goit.java.dao.model.*;
 
+import java.time.LocalDateTime;
+import java.time.format.FormatStyle;
 import java.util.*;
 
+import static java.time.format.DateTimeFormatter.ofLocalizedDateTime;
+
+@Service
 public class OrderService {
 
-    private OrdersDAO ordersDAO;
-    private DishesDAO dishesDAO;
-    private DishToOrderDAO dishToOrderDAO;
+    @Autowired
+    private OrdersDAO ordersDAOImpl;
+
+    @Autowired
+    private DishesDAO dishesDAOImpl;
+
+    @Autowired
     private EmployeeService employeeService;
+
+    @Autowired
     private StorageService storageService;
-    private Requests requests = new Requests();
 
     public List<Dish> allDishes() {
-        return dishesDAO.findAll();
+        return dishesDAOImpl.findAll();
     }
 
     public List<Orders> getAllOrders() {
-        return ordersDAO.findAll();
+        return ordersDAOImpl.findAll();
     }
 
     @Transactional
     public Orders getOrderById(int id) {
-        return ordersDAO.findById(id);
+        return ordersDAOImpl.read(id);
     }
 
     @Transactional
     public void deleteOrderById(int orderId) {
-        dishToOrderDAO.removeById(orderId);
-        ordersDAO.remove(ordersDAO.findById(orderId));
+        ordersDAOImpl.delete(ordersDAOImpl.read(orderId));
     }
 
     @Transactional
     public void updateOrderInfo(int orderId, int tableNumber, int waiterId) {
-        Orders order = ordersDAO.findById(orderId);
+        Orders order = ordersDAOImpl.read(orderId);
         order.setTableNumber(tableNumber);
         order.setEmployee(employeeService.getEmployeeByID(waiterId));
     }
@@ -44,21 +57,21 @@ public class OrderService {
     @Transactional
     public void addTheDishToOrder(int orderId, int dishId) {
 
-        List<Dish> dishes = ordersDAO.findById(orderId).getDishes();
+        List<Dish> dishes = ordersDAOImpl.read(orderId).getDishes();
 
-        dishes.add(dishesDAO.findById(dishId));
+        dishes.add(dishesDAOImpl.read(dishId));
 
-        ordersDAO.findById(orderId).setListOfDishes(dishes);
+        ordersDAOImpl.read(orderId).setListOfDishes(dishes);
     }
 
     @Transactional
-    public List<Orders> getOrdersByWaiter(Employee employee) {
-        return ordersDAO.getOrdersByWaiter(employee);
+    public List<Orders> getOrdersByWaiter(Employee waiter) {
+        return ordersDAOImpl.getOrdersByWaiter(waiter);
     }
 
     @Transactional
     public List<Orders> getOrderByDate(String date) {
-        return ordersDAO.getOrdersByDate(date);
+        return ordersDAOImpl.getOrdersByDate(date);
     }
 
     public String enoughIngredients(ArrayList selectedDishes) {
@@ -100,7 +113,6 @@ public class OrderService {
             ingredientInStorage.setAmount(amountOfIngredientAfterDecrease);
         }
 
-
     }
 
     private HashMap<Integer, Integer> amountOfEachIngredientId(ArrayList selectedDishes) {
@@ -109,7 +121,7 @@ public class OrderService {
 
         for (int i = 0; i < selectedDishes.size(); i++) {
             int id = Integer.parseInt(selectedDishes.get(i).toString());
-            dishesToOrder.add(dishesDAO.findById(id));
+            dishesToOrder.add(dishesDAOImpl.read(id));
         }
 
         ArrayList<Ingredient> ingredientsToOrder = new ArrayList<>();
@@ -144,8 +156,8 @@ public class OrderService {
     @Transactional
     public void deleteDishFromOrder(int orderId, int dishId) {
 
-        Orders orders = ordersDAO.findById(orderId);
-        Dish dish = dishesDAO.findById(dishId);
+        Orders orders = ordersDAOImpl.read(orderId);
+        Dish dish = dishesDAOImpl.read(dishId);
 
         List<Dish> dishes = orders.getDishes();
         dishes.remove(dish);
@@ -161,11 +173,11 @@ public class OrderService {
 
 
     @Transactional
-    public boolean IsThereNoOrdersWithThisEmployee(Employee employee) {
+    public boolean IsThereNoOrdersWithThisEmployee(Employee waiter) {
 
         boolean result = false;
 
-        List<Orders> list = ordersDAO.getOrdersByWaiter(employee);
+        List<Orders> list = ordersDAOImpl.getOrdersByWaiter(waiter);
 
         if (list.isEmpty()) result = true;
 
@@ -179,7 +191,7 @@ public class OrderService {
 
     @Transactional
     public List<Orders> getOrdersByTableNumber(int tableNumber) {
-        return ordersDAO.getOrdersByTableNumber(tableNumber);
+        return ordersDAOImpl.getOrdersByTableNumber(tableNumber);
     }
 
     @Transactional
@@ -189,13 +201,13 @@ public class OrderService {
 
         order.setEmployee(employeeService.getEmployeeByID(waiterId));
         order.setTableNumber(tableNumber);
-        order.setDate(requests.getCurrentTime());
+        order.setDate(LocalDateTime.now().format(ofLocalizedDateTime(FormatStyle.SHORT)));
         order.setAccess(true);
 
         List<Dish> dishes = new ArrayList<>();
 
         for (int i = 0; i < selectedDishes.size(); i++) {
-            Dish dish = dishesDAO.findById(Integer.parseInt(selectedDishes.get(i).toString()));
+            Dish dish = dishesDAOImpl.read(Integer.parseInt(selectedDishes.get(i).toString()));
             dishes.add(dish);
         }
 
@@ -203,7 +215,7 @@ public class OrderService {
 
         order.setListOfDishes(dishes);
 
-        ordersDAO.save(order);
+        ordersDAOImpl.create(order);
     }
 
     public void setStorageService(StorageService storageService) {
@@ -214,15 +226,11 @@ public class OrderService {
         this.employeeService = employeeService;
     }
 
-    public void setDishToOrderDAO(DishToOrderDAO dishToOrderDAO) {
-        this.dishToOrderDAO = dishToOrderDAO;
+    public void setOrdersDAOImpl(OrdersDAOImpl ordersDAOImpl) {
+        this.ordersDAOImpl = ordersDAOImpl;
     }
 
-    public void setOrdersDAO(OrdersDAO ordersDAO) {
-        this.ordersDAO = ordersDAO;
-    }
-
-    public void setDishesDAO(DishesDAO dishesDAO) {
-        this.dishesDAO = dishesDAO;
+    public void setDishesDAOImpl(DishesDAOImpl dishesDAOImpl) {
+        this.dishesDAOImpl = dishesDAOImpl;
     }
 }

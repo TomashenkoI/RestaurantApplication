@@ -3,6 +3,7 @@ package ua.goit.java.dao.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "ingredients")
@@ -16,6 +17,24 @@ public class Ingredient {
 
     @Column(name = "name")
     private String name;
+
+    protected Ingredient() {
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Ingredient)) return false;
+        Ingredient that = (Ingredient) o;
+        return ID == that.ID &&
+                Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID, name);
+    }
 
     public int getID() {
         return ID;
@@ -37,15 +56,5 @@ public class Ingredient {
         this.name = name;
     }
 
-    protected Ingredient() {
-    }
-
-    @Override
-    public String toString() {
-        return "Ingredient{" +
-                "ID=" + ID +
-                ", name='" + name + '\'' +
-                '}';
-    }
 }
 

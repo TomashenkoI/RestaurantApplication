@@ -20,18 +20,4 @@ public class Cook extends Employee {
         this.cookedDishes = cookedDishes;
     }
 
-    @Override
-    public String toString() {
-        return "Cook{" +
-                "ID=" + getID() +  "\t" +
-                " lastName=" + "\t" + getLastName() +
-                " firstName=" +  "\t" + getFirstName() +
-                " dateOfBirth=" +  "\t" + getDateOfBirth() +
-                " phoneNumber=" +  "\t" + getPhoneNumber() +
-                " position=" +  "\t" + getPosition() + "\t" +
-                " salary= " + getSalary() +
-                "cookedDishes=" + cookedDishes +
-                '}' ;
-    }
-
 }

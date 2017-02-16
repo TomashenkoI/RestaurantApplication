@@ -19,7 +19,7 @@ public class Orders {
     @JoinColumn(name = "waiter_id")
     private Employee employee;
 
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "dish_to_order",
             joinColumns = @JoinColumn(name = "order_id"),
@@ -84,14 +84,4 @@ public class Orders {
         return access;
     }
 
-    @Override
-    public String toString() {
-        return "Orders{" +
-                "ID=" + ID +
-                ", employee=" + employee +
-                ", listOfDishesID=" + listOfDishes +
-                ", tableNumber=" + tableNumber +
-                ", date='" + date + '\'' +
-                '}';
-    }
 }

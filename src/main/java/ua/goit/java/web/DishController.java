@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import ua.goit.java.dao.model.Dish;
 import ua.goit.java.dao.model.Ingredient;
 import ua.goit.java.service.DishService;
 import ua.goit.java.service.IngredientService;
@@ -191,7 +192,7 @@ public class DishController{
     }
 
     @RequestMapping(value = "/admin/updated_DishId={dishId}", method = RequestMethod.POST)
-    public ModelAndView updateExistingDish(@PathVariable String dishId,
+    public ModelAndView updateExistingDish(@PathVariable int dishId,
                                            @RequestParam("selectedIngredients") ArrayList selectedIngredients,
                                            @RequestParam("dishName") String dishName,
                                            @RequestParam("dishCategory") String category,
@@ -201,11 +202,13 @@ public class DishController{
 
         ModelAndView modelAndView = new ModelAndView();
 
-        List<Ingredient> ingredientsToDish = dishService.getIngredientsToThisDish(Integer.parseInt(dishId));
+        dishService.updateDishInfo(dishId, selectedIngredients, dishName, category, price, weight);
 
-        setPictureForDish(Integer.parseInt(dishId), modelAndView);
-        modelAndView.addObject("ingredientsToDish", ingredientsToDish);
-        modelAndView.addObject("dish", dishService.getDishByID(Integer.parseInt(dishId)));
+        Dish dish = dishService.getDishByID(dishId);
+
+        setPictureForDish(dishId, modelAndView);
+        modelAndView.addObject("ingredientsToDish", dish.getIngredients());
+        modelAndView.addObject("dish", dishService.getDishByID(dishId));
 
         modelAndView.setViewName("admin/dish");
 

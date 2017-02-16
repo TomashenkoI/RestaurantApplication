@@ -195,7 +195,7 @@ public class EmployeeController {
 
         ModelAndView modelAndView = new ModelAndView();
 
-        Employee employeeWithNewInformation = employeeService.setInformation(firstName, lastName, phoneNumber,dateOfBirth,
+        Employee employeeWithNewInformation = employeeService.setInformation(firstName, lastName, phoneNumber, dateOfBirth,
                                                                              position, salary);
 
         employeeService.updateEmployeeInfo(employeeId, employeeWithNewInformation);

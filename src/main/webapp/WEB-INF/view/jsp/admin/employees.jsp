@@ -50,7 +50,7 @@
                                 <tr class="hover" onclick="location.href='/admin/employee/employeeId=${employee.ID}'">
                                     <td>${employee.firstName}</td>
                                     <td>${employee.lastName}</td>
-                                    <td>${employee.position}</td>
+                                    <td>${employee.employeePosition}</td>
                                     <td><img width="50" height="50"
                                              src="${employee.photoURL}"/></td>
                                 </tr>

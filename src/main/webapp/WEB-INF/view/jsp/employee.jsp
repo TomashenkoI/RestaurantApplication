@@ -28,7 +28,7 @@
     <button class="selectedPositionButton" onclick="location.href='/employees';">< Back to list</button>;
 
     <div class="employeePhoto">
-        <img width="250" height="300" src="${employee.photoURL}"/>
+        <%--<img width="250" height="300" src="${employee.photoURL}"/>--%>
     </div>
 
     <table class="table">
@@ -43,7 +43,7 @@
         </tr>
         <tr>
             <th>Position</th>
-            <td>${employee.position}</td>
+            <td>${employee.employeePosition}</td>
         </tr>
         <tr>
             <th>Date of birth</th>

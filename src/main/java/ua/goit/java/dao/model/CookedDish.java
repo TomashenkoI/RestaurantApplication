@@ -4,6 +4,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 
 import javax.persistence.*;
+import java.util.Objects;
+
 @Entity
 @Table(name = "cooked_dishes")
 public class CookedDish {
@@ -26,6 +28,23 @@ public class CookedDish {
 
     @Column(name = "order_id")
     private int orderId;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CookedDish)) return false;
+        CookedDish that = (CookedDish) o;
+        return ID == that.ID &&
+                dishId == that.dishId &&
+                orderId == that.orderId &&
+                Objects.equals(employee, that.employee) &&
+                Objects.equals(date, that.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID, dishId, employee, date, orderId);
+    }
 
     public int getID() {
         return ID;
@@ -67,14 +86,4 @@ public class CookedDish {
         this.orderId = orderId;
     }
 
-    @Override
-    public String toString() {
-        return "CookedDish{" +
-                "ID=" + ID +
-                ", dishId=" + dishId +
-                ", employee=" + employee +
-                ", date='" + date + '\'' +
-                ", orderId=" + orderId +
-                '}';
-    }
 }

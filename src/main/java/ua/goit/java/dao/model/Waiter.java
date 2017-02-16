@@ -20,18 +20,4 @@ public class Waiter extends Employee {
         this.orders = orders;
     }
 
-    @Override
-    public String toString() {
-        return "Waiter{" +
-                "ID=" + getID() +  "\t" +
-                " lastName=" + "\t" + getLastName() +
-                " firstName=" +  "\t" + getFirstName() +
-                " dateOfBirth=" +  "\t" + getDateOfBirth() +
-                " phoneNumber=" +  "\t" + getPhoneNumber() +
-                " position=" +  "\t" + getPosition() + "\t" +
-                " salary= " + getSalary() +
-                "orders=" + orders +
-                '}' ;
-    }
-
 }
