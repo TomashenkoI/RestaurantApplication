@@ -20,7 +20,6 @@ public class Dish {
     @Enumerated(EnumType.STRING)
     private DishCategory dishCategory;
 
-//    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "ingredients_to_dish",

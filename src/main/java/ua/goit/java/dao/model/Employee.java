@@ -101,16 +101,4 @@ public class Employee {
         this.photoURL = photoURL;
     }
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "ID=" + ID +  "\t" +
-                " lastName=" + "\t" + lastName +
-                " firstName=" +  "\t" + firstName +
-                " dateOfBirth=" +  "\t" + dateOfBirth +
-                " phoneNumber=" +  "\t" + phoneNumber +
-                " employeePosition=" +  "\t" + employeePosition + "\t" +
-                " salary= " + salary +
-                '}';
-    }
 }
